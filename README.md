@@ -76,11 +76,11 @@ Emitrr_Physician_Notetaker_VishalMaurya/
 #### How to Run
 Task 1: Medical NLP Summarization
 pip install -r requirements1.txt
-python emitrr_physician_notetaker_task_1.py
+python task_1.py
 
 Task 2: Emotion & Intent Detection
 pip install -r requirements2.txt
-python emitrr_physician_notetaker_task_2.py
+python task_2.py
 
 Requirements (Summary)
 flask
