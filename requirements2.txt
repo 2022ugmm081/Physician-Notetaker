@@ -1,5 +1,1 @@
-flask
-transformers
-torch
-sentencepiece
-accelerate
+
