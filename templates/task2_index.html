@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Sentiment & Intent Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="max-w-3xl mx-auto p-6 md:p-12">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-purple-700">Patient Sentiment & Intent (Task 2)</h1>
+            <p class="text-lg text-gray-600 mt-2">Extract patient sentiment and intent from dialogue.</p>
+        </header>
+
+        <main class="bg-white p-8 rounded-lg shadow-xl">
+            <!-- Input Section -->
+            <div>
+                <label for="transcript-input" class="block text-lg font-semibold mb-2">Consultation Transcript</label>
+                <textarea id="transcript-input" rows="15" class="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none" placeholder="Paste or type the patient-physician dialogue here...">{{ sample_transcript|e }}</textarea>
+                <button id="analyze-btn" class="mt-4 w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out flex items-center justify-center">
+                    <span id="btn-text">Analyze Sentiment</span>
+                    <svg id="btn-loader" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="mt-6 p-4 bg-red-100 text-red-800 border border-red-300 rounded-lg hidden">
+                <strong class="font-bold">Error:</strong>
+                <span id="error-text"></span>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-container" class="mt-10 p-6 bg-gray-50 rounded-lg shadow-inner hidden">
+                <h2 class="text-2xl font-bold mb-4 text-gray-700">Analysis Results</h2>
+                <pre id="json-output" class="text-lg overflow-auto"></pre>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('analyze-btn').addEventListener('click', async () => {
+            const transcript = document.getElementById('transcript-input').value;
+            
+            const btn = document.getElementById('analyze-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+            const resultsContainer = document.getElementById('results-container');
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            const jsonOutput = document.getElementById('json-output');
+
+            // 1. Show loader, hide old results/errors
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            btn.disabled = true;
+            resultsContainer.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            try {
+                // 2. Make API call
+                const response = await fetch('/analyze_sentiment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ transcript: transcript }),
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(errData.error || `HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // 3. Populate results
+                jsonOutput.textContent = JSON.stringify(data, null, 2);
+
+                // 4. Show results
+                resultsContainer.classList.remove('hidden');
+
+            } catch (error) {
+                // 5. Show error
+                console.error('Analysis error:', error);
+                errorText.textContent = error.message;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // 6. Hide loaders, re-enable button
+                btnText.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
