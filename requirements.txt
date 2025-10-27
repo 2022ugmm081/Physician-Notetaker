@@ -1,0 +1,7 @@
+flask
+keybert
+transformers
+torch
+sentencepiece
+accelerate
+numpy
