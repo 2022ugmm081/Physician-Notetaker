@@ -31,13 +31,19 @@ Deployment : Flask
 ### Task 1: Medical NLP Summarization
 Goal:
 Extract and summarize clinical details from a doctor–patient conversation.
+
 Pipeline Steps:
 NER Extraction: Identify medical entities such as symptoms, treatments, diagnoses, prognosis using 
+
 d4data/biomedical-ner-all
+
 Summarization: Generate a concise medical report using
+
 facebook/bart-large-cnn
+
 Keyword Extraction: Extract key medical phrases using
 KeyBERT
+
 
 JSON Output: Produce structured data such as:
 
@@ -51,12 +57,16 @@ JSON Output: Produce structured data such as:
 }
 
 ### Task 2: Patient Emotion & Intent Detection
+
 Goal:
 Identify the sentiment and intent behind the patient's responses.
+
 Pipeline Steps:
 Extract all patient responses using Regex
+
 Apply Zero-Shot Classification with
 facebook/bart-large-mnli
+
 Generate both Sentiment and Intent outputs as JSON:
 
 {
