@@ -78,21 +78,18 @@ Generate both Sentiment and Intent outputs as JSON:
 Emitrr_Physician_Notetaker_VishalMaurya/
 │
 ├── README.md
-├── requirements1.txt
-├── requirements2.txt
+├── requirements.txt
 ├── Emitrr_Physician_Notetaker_Task_1.ipynb
 ├── Emitrr_Physician_Notetaker_Task_2.ipynb
 
 #### How to Run
 Task 1: Medical NLP Summarization
 
-pip install -r requirements1.txt
+pip install -r requirements.txt
 
 python task_1.py
 
 Task 2: Emotion & Intent Detection
-
-pip install -r requirements2.txt
 
 python task_2.py
 
