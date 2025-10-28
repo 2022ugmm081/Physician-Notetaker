@@ -1,7 +1,7 @@
-flask
-keybert
-transformers
-torch
-sentencepiece
-accelerate
-numpy
+flask == 3.1.2
+keybert == 0.9.0
+transformers == 4.57.1
+torch == 2.9.0
+sentencepiece == 0.2.1
+accelerate == 1.11.0
+numpy == 2.3.4
