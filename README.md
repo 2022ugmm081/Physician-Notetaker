@@ -112,9 +112,9 @@ Emitrr_Physician_Notetaker_VishalMaurya/
 
 ├── requirements.txt 
 
-├── Emitrr_Physician_Notetaker_Task_1.ipynb 
+├── task_1.ipynb 
 
-└── Emitrr_Physician_Notetaker_Task_2.ipynb 
+└── task_2.ipynb 
 
 ### Installation & Execution (Bash/Powershell/cmd) 
 
@@ -124,7 +124,7 @@ Task 1
 
 pip install -r requirements.txt 
 
-python emitrr_physician_notetaker_task_1.py 
+python task_1.py 
 
 Or directly run in Colab 
 
@@ -133,7 +133,7 @@ _cP9Fx2zf
 
 Task 2 
 
-python emitrr_physician_notetaker_task_2.py 
+python task_2.py 
 
 Or directly run in Colab 
 
