@@ -128,8 +128,7 @@ python task_1.py
 
 Or directly run in Colab 
 
-https://colab.research.google.com/drive/18RXhF_xlsMZL62Ka9SjqaYMTAGeTdz1G#scrollTo=z1a
-_cP9Fx2zf 
+https://colab.research.google.com/drive/18RXhF_xlsMZL62Ka9SjqaYMTAGeTdz1G
 
 Task 2 
 
